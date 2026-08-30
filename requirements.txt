@@ -3,11 +3,9 @@ numpy
 scikit-learn
 matplotlib
 seaborn
-tensorflow
-groq
-python-dotenv
 streamlit
+python-dotenv
+groq
+Pillow
 shap
-reportlab
 mlflow
-opencv-python
