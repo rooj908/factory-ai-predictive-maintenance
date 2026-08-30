@@ -1,3 +1,4 @@
+```python
 import sys
 from pathlib import Path
 
@@ -68,13 +69,15 @@ except Exception:
 
 try:
     import tensorflow as tf
-except Exception:
+except Exception as e:
     tf = None
+    st.error(f"TensorFlow import error: {e}")
 
 try:
     import joblib
-except Exception:
+except Exception as e:
     joblib = None
+    st.error(f"Joblib import error: {e}")
 
 
 # ============================================================
@@ -190,13 +193,11 @@ def train_model(data):
 
     data = data.copy()
 
-    # Actual target from factory_data.csv
     target = "failure_within_24h"
 
     if target not in data.columns:
         return None, None
 
-    # Remove timestamp and leakage columns
     drop_cols = [
         col
         for col in data.columns
@@ -281,13 +282,30 @@ model, model_columns = train_model(df)
 @st.cache_resource
 def load_deep_learning_model():
 
-    if tf is None or joblib is None:
+    if tf is None:
         return None, None
 
+    if joblib is None:
+        return None, None
+
+    # Check model file
     if not DL_MODEL_PATH.exists():
+
+        st.error(
+            "❌ Deep Learning model file not found:\n\n"
+            f"{DL_MODEL_PATH}"
+        )
+
         return None, None
 
+    # Check preprocessor file
     if not DL_PREPROCESSOR_PATH.exists():
+
+        st.error(
+            "❌ Deep Learning preprocessor not found:\n\n"
+            f"{DL_PREPROCESSOR_PATH}"
+        )
+
         return None, None
 
     try:
@@ -300,9 +318,22 @@ def load_deep_learning_model():
             DL_PREPROCESSOR_PATH
         )
 
+        st.success(
+            "✅ TensorFlow Deep Learning model "
+            "loaded successfully."
+        )
+
         return dl_model, dl_preprocessor
 
-    except Exception:
+    except Exception as e:
+
+        st.error(
+            "❌ Deep Learning model loading failed."
+        )
+
+        st.code(
+            str(e)
+        )
 
         return None, None
 
@@ -358,6 +389,7 @@ def deep_learning_prediction(sensor_record):
             X_processed,
             "toarray"
         ):
+
             X_processed = (
                 X_processed.toarray()
             )
@@ -381,7 +413,15 @@ def deep_learning_prediction(sensor_record):
             )
         )
 
-    except Exception:
+    except Exception as e:
+
+        st.error(
+            "❌ Deep Learning prediction failed."
+        )
+
+        st.code(
+            str(e)
+        )
 
         return None
 
@@ -477,51 +517,37 @@ def sensor_input(
 
 vibration = sensor_input(
     "vibration_rms",
-    default_values[
-        "vibration_rms"
-    ]
+    default_values["vibration_rms"]
 )
 
 temperature = sensor_input(
     "temperature_motor",
-    default_values[
-        "temperature_motor"
-    ]
+    default_values["temperature_motor"]
 )
 
 current = sensor_input(
     "current_phase_avg",
-    default_values[
-        "current_phase_avg"
-    ]
+    default_values["current_phase_avg"]
 )
 
 pressure = sensor_input(
     "pressure_level",
-    default_values[
-        "pressure_level"
-    ]
+    default_values["pressure_level"]
 )
 
 rpm = sensor_input(
     "rpm",
-    default_values[
-        "rpm"
-    ]
+    default_values["rpm"]
 )
 
 hours = sensor_input(
     "hours_since_maintenance",
-    default_values[
-        "hours_since_maintenance"
-    ]
+    default_values["hours_since_maintenance"]
 )
 
 ambient = sensor_input(
     "ambient_temp",
-    default_values[
-        "ambient_temp"
-    ]
+    default_values["ambient_temp"]
 )
 
 
@@ -539,9 +565,7 @@ if df is not None:
     if "machine_type" in df.columns:
 
         machine_types = sorted(
-            df[
-                "machine_type"
-            ]
+            df["machine_type"]
             .dropna()
             .unique()
             .tolist()
@@ -549,20 +573,16 @@ if df is not None:
 
         if machine_types:
 
-            machine_type = (
-                st.sidebar.selectbox(
-                    "Machine Type",
-                    machine_types
-                )
+            machine_type = st.sidebar.selectbox(
+                "Machine Type",
+                machine_types
             )
 
 
     if "operating_mode" in df.columns:
 
         modes = sorted(
-            df[
-                "operating_mode"
-            ]
+            df["operating_mode"]
             .dropna()
             .unique()
             .tolist()
@@ -570,11 +590,9 @@ if df is not None:
 
         if modes:
 
-            operating_mode = (
-                st.sidebar.selectbox(
-                    "Operating Mode",
-                    modes
-                )
+            operating_mode = st.sidebar.selectbox(
+                "Operating Mode",
+                modes
             )
 
 
@@ -588,16 +606,14 @@ st.sidebar.markdown(
     "### 📷 Machine Image"
 )
 
-uploaded_image = (
-    st.sidebar.file_uploader(
-        "Upload machine image",
-        type=[
-            "png",
-            "jpg",
-            "jpeg",
-            "webp"
-        ]
-    )
+uploaded_image = st.sidebar.file_uploader(
+    "Upload machine image",
+    type=[
+        "png",
+        "jpg",
+        "jpeg",
+        "webp"
+    ]
 )
 
 
@@ -695,8 +711,6 @@ def make_rf_prediction():
             pass
 
 
-    # Fallback risk calculation
-
     risk_score = 0.0
 
     if vibration > 5:
@@ -746,11 +760,9 @@ def make_rf_prediction():
 def get_risk(probability):
 
     if probability >= 0.70:
-
         return "HIGH"
 
     elif probability >= 0.40:
-
         return "MEDIUM"
 
     return "LOW"
@@ -766,29 +778,20 @@ if run_analysis:
     # Predictions
     # --------------------------------------------------------
 
-    rf_probability = (
-        make_rf_prediction()
+    rf_probability = make_rf_prediction()
+
+    dl_probability = deep_learning_prediction(
+        sensor_record
     )
 
-    dl_probability = (
-        deep_learning_prediction(
-            sensor_record
-        )
-    )
-
-
-    # Deep Learning is preferred when available
+    # Deep Learning preferred when available
     if dl_probability is not None:
 
-        final_probability = (
-            dl_probability
-        )
+        final_probability = dl_probability
 
     else:
 
-        final_probability = (
-            rf_probability
-        )
+        final_probability = rf_probability
 
 
     risk_level = get_risk(
@@ -857,7 +860,6 @@ if run_analysis:
 
     image_path = None
 
-
     if uploaded_image:
 
         temp_dir = (
@@ -871,12 +873,10 @@ if run_analysis:
             exist_ok=True
         )
 
-
         image_path = (
             temp_dir
             / uploaded_image.name
         )
-
 
         with open(
             image_path,
@@ -930,16 +930,12 @@ if run_analysis:
 
         try:
 
-            vision_agent = (
-                VisionAgent()
-            )
+            vision_agent = VisionAgent()
 
-            vision_result = (
-                vision_agent.analyze(
-                    str(image_path)
-                    if image_path
-                    else None
-                )
+            vision_result = vision_agent.analyze(
+                str(image_path)
+                if image_path
+                else None
             )
 
         except Exception:
@@ -965,9 +961,7 @@ if run_analysis:
 
         try:
 
-            knowledge_agent = (
-                KnowledgeAgent()
-            )
+            knowledge_agent = KnowledgeAgent()
 
             knowledge_result = (
                 knowledge_agent.analyze(
@@ -977,9 +971,7 @@ if run_analysis:
 
         except Exception as e:
 
-            knowledge_result[
-                "error"
-            ] = str(e)
+            knowledge_result["error"] = str(e)
 
 
     # ========================================================
@@ -1030,16 +1022,12 @@ if run_analysis:
 
         try:
 
-            planning_agent = (
-                PlanningAgent()
-            )
+            planning_agent = PlanningAgent()
 
-            planning_result = (
-                planning_agent.decide(
-                    predictive_result,
-                    knowledge_result,
-                    vision_result
-                )
+            planning_result = planning_agent.decide(
+                predictive_result,
+                knowledge_result,
+                vision_result
             )
 
         except Exception:
@@ -1051,49 +1039,23 @@ if run_analysis:
     # SAVE RESULTS
     # ========================================================
 
-    st.session_state[
-        "rf_probability"
-    ] = rf_probability
+    st.session_state["rf_probability"] = rf_probability
 
+    st.session_state["dl_probability"] = dl_probability
 
-    st.session_state[
-        "dl_probability"
-    ] = dl_probability
+    st.session_state["failure_probability"] = final_probability
 
+    st.session_state["risk_level"] = risk_level
 
-    st.session_state[
-        "failure_probability"
-    ] = final_probability
+    st.session_state["predictive_result"] = predictive_result
 
+    st.session_state["vision_result"] = vision_result
 
-    st.session_state[
-        "risk_level"
-    ] = risk_level
+    st.session_state["knowledge_result"] = knowledge_result
 
+    st.session_state["planning_result"] = planning_result
 
-    st.session_state[
-        "predictive_result"
-    ] = predictive_result
-
-
-    st.session_state[
-        "vision_result"
-    ] = vision_result
-
-
-    st.session_state[
-        "knowledge_result"
-    ] = knowledge_result
-
-
-    st.session_state[
-        "planning_result"
-    ] = planning_result
-
-
-    st.session_state[
-        "image_path"
-    ] = image_path
+    st.session_state["image_path"] = image_path
 
 
     st.success(
@@ -1105,67 +1067,44 @@ if run_analysis:
 # SESSION DEFAULTS
 # ============================================================
 
-rf_probability = (
-    st.session_state.get(
-        "rf_probability",
-        0.0
-    )
+rf_probability = st.session_state.get(
+    "rf_probability",
+    0.0
 )
 
-
-dl_probability = (
-    st.session_state.get(
-        "dl_probability",
-        None
-    )
+dl_probability = st.session_state.get(
+    "dl_probability",
+    None
 )
 
-
-failure_probability = (
-    st.session_state.get(
-        "failure_probability",
-        0.0
-    )
+failure_probability = st.session_state.get(
+    "failure_probability",
+    0.0
 )
 
-
-risk_level = (
-    st.session_state.get(
-        "risk_level",
-        "NOT ANALYZED"
-    )
+risk_level = st.session_state.get(
+    "risk_level",
+    "NOT ANALYZED"
 )
 
-
-predictive_result = (
-    st.session_state.get(
-        "predictive_result",
-        {}
-    )
+predictive_result = st.session_state.get(
+    "predictive_result",
+    {}
 )
 
-
-vision_result = (
-    st.session_state.get(
-        "vision_result",
-        {}
-    )
+vision_result = st.session_state.get(
+    "vision_result",
+    {}
 )
 
-
-knowledge_result = (
-    st.session_state.get(
-        "knowledge_result",
-        {}
-    )
+knowledge_result = st.session_state.get(
+    "knowledge_result",
+    {}
 )
 
-
-planning_result = (
-    st.session_state.get(
-        "planning_result",
-        {}
-    )
+planning_result = st.session_state.get(
+    "planning_result",
+    {}
 )
 
 
@@ -1179,11 +1118,7 @@ with tab1:
         "1. Predictive Maintenance"
     )
 
-
-    col1, col2, col3 = (
-        st.columns(3)
-    )
-
+    col1, col2, col3 = st.columns(3)
 
     with col1:
 
@@ -1192,14 +1127,12 @@ with tab1:
             f"{failure_probability * 100:.1f}%"
         )
 
-
     with col2:
 
         st.metric(
             "Risk Level",
             risk_level
         )
-
 
     with col3:
 
@@ -1208,15 +1141,12 @@ with tab1:
             machine_type
         )
 
-
     st.markdown(
         "### Sensor Status"
     )
 
-
     sensor_df = pd.DataFrame(
         {
-
             "Sensor": [
 
                 "Vibration RMS",
@@ -1253,13 +1183,11 @@ with tab1:
         }
     )
 
-
     st.dataframe(
         sensor_df,
         use_container_width=True,
         hide_index=True
     )
-
 
     if risk_level == "HIGH":
 
@@ -1270,7 +1198,6 @@ with tab1:
             unsafe_allow_html=True
         )
 
-
     elif risk_level == "MEDIUM":
 
         st.markdown(
@@ -1279,7 +1206,6 @@ with tab1:
             '</div>',
             unsafe_allow_html=True
         )
-
 
     elif risk_level == "LOW":
 
@@ -1301,7 +1227,6 @@ with tab2:
         "2. Deep Learning Failure Prediction"
     )
 
-
     if dl_model is not None:
 
         st.success(
@@ -1309,11 +1234,7 @@ with tab2:
             "loaded successfully."
         )
 
-
-        col1, col2, col3 = (
-            st.columns(3)
-        )
-
+        col1, col2, col3 = st.columns(3)
 
         with col1:
 
@@ -1330,7 +1251,6 @@ with tab2:
                     "DL Failure Probability",
                     "Run Analysis"
                 )
-
 
         with col2:
 
@@ -1350,7 +1270,6 @@ with tab2:
                     "NOT ANALYZED"
                 )
 
-
         with col3:
 
             st.metric(
@@ -1358,11 +1277,9 @@ with tab2:
                 "MLP Neural Network"
             )
 
-
         st.markdown(
             "### Model Information"
         )
-
 
         st.write(
             "The trained neural network predicts "
@@ -1370,25 +1287,19 @@ with tab2:
             "within the next 24 hours."
         )
 
-
         st.write(
             "Test Accuracy: **95.13%**"
         )
-
 
         st.write(
             "ROC-AUC: **0.9827**"
         )
 
-
         if dl_probability is not None:
 
             st.progress(
-                float(
-                    dl_probability
-                )
+                float(dl_probability)
             )
-
 
             if dl_probability >= 0.70:
 
@@ -1397,14 +1308,12 @@ with tab2:
                     "detected by Deep Learning."
                 )
 
-
             elif dl_probability >= 0.40:
 
                 st.warning(
                     "Medium failure probability "
                     "detected by Deep Learning."
                 )
-
 
             else:
 
@@ -1413,13 +1322,11 @@ with tab2:
                     "detected by Deep Learning."
                 )
 
-
     else:
 
         st.warning(
             "Deep Learning model was not loaded."
         )
-
 
         st.code(
             "deep_learning/model/"
@@ -1439,7 +1346,6 @@ with tab3:
         "3. Computer Vision"
     )
 
-
     if uploaded_image:
 
         st.image(
@@ -1448,19 +1354,12 @@ with tab3:
             use_container_width=True
         )
 
-
-        result = (
-            vision_result.get(
-                "result",
-                {}
-            )
+        result = vision_result.get(
+            "result",
+            {}
         )
 
-
-        col1, col2, col3 = (
-            st.columns(3)
-        )
-
+        col1, col2, col3 = st.columns(3)
 
         with col1:
 
@@ -1472,7 +1371,6 @@ with tab3:
                 )
             )
 
-
         with col2:
 
             st.metric(
@@ -1483,7 +1381,6 @@ with tab3:
                 )
             )
 
-
         with col3:
 
             st.metric(
@@ -1491,12 +1388,10 @@ with tab3:
                 f"{result.get('confidence', 0.85) * 100:.0f}%"
             )
 
-
         st.info(
             "Vision Agent detected a potential "
             "mechanical anomaly from the uploaded image."
         )
-
 
     else:
 
@@ -1517,20 +1412,15 @@ with tab4:
         "4. RAG / Maintenance Knowledge"
     )
 
-
     st.write(
         "Maintenance evidence retrieved "
         "from the knowledge base."
     )
 
-
-    evidence = (
-        knowledge_result.get(
-            "evidence",
-            []
-        )
+    evidence = knowledge_result.get(
+        "evidence",
+        []
     )
-
 
     if evidence:
 
@@ -1557,7 +1447,6 @@ with tab4:
                     )
                 )
 
-
     else:
 
         st.info(
@@ -1576,11 +1465,7 @@ with tab5:
         "5. Multi-Agent Decision System"
     )
 
-
-    col1, col2 = (
-        st.columns(2)
-    )
-
+    col1, col2 = st.columns(2)
 
     with col1:
 
@@ -1592,7 +1477,6 @@ with tab5:
             predictive_result
         )
 
-
         st.subheader(
             "👁️ Vision Agent"
         )
@@ -1600,7 +1484,6 @@ with tab5:
         st.json(
             vision_result
         )
-
 
     with col2:
 
@@ -1612,7 +1495,6 @@ with tab5:
             knowledge_result
         )
 
-
         st.subheader(
             "🧠 Planning Agent"
         )
@@ -1621,22 +1503,16 @@ with tab5:
             planning_result
         )
 
-
     st.markdown("---")
 
-
-    recommendation = (
-        planning_result.get(
-            "recommendation",
-            "Run analysis first."
-        )
+    recommendation = planning_result.get(
+        "recommendation",
+        "Run analysis first."
     )
-
 
     st.subheader(
         "🎯 Final AI Recommendation"
     )
-
 
     st.success(
         recommendation
@@ -1653,26 +1529,20 @@ with tab6:
         "6. Factory Digital Twin"
     )
 
-
     st.write(
         "Simulate different maintenance "
         "strategies before taking action "
         "on the real machine."
     )
 
-
-    baseline_risk = (
-        failure_probability
-    )
+    baseline_risk = failure_probability
 
 
     # --------------------------------------------------------
     # Continue Operation
     # --------------------------------------------------------
 
-    continue_risk = (
-        baseline_risk
-    )
+    continue_risk = baseline_risk
 
     continue_downtime = 0
 
@@ -1748,7 +1618,6 @@ with tab6:
                     )
             },
 
-
             {
                 "Scenario":
                     "Stop for Maintenance",
@@ -1768,7 +1637,6 @@ with tab6:
                         2
                     )
             },
-
 
             {
                 "Scenario":
@@ -1800,7 +1668,6 @@ with tab6:
         "WHAT-IF RESULTS"
     )
 
-
     st.dataframe(
         digital_twin_df,
         use_container_width=True,
@@ -1820,19 +1687,13 @@ with tab6:
         ]
     )
 
-
     st.markdown("---")
-
 
     st.subheader(
         "🏆 Recommended Scenario"
     )
 
-
-    col1, col2, col3 = (
-        st.columns(3)
-    )
-
+    col1, col2, col3 = st.columns(3)
 
     with col1:
 
@@ -1843,14 +1704,12 @@ with tab6:
             ]
         )
 
-
     with col2:
 
         st.metric(
             "Estimated Cost",
             f"${best_scenario['Estimated Cost']:,.0f}"
         )
-
 
     with col3:
 
@@ -1872,3 +1731,4 @@ st.caption(
     "Computer Vision + RAG + "
     "Multi-Agent Workflow + Digital Twin"
 )
+```
