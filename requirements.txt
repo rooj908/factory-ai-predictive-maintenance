@@ -9,3 +9,5 @@ groq
 Pillow
 shap
 mlflow
+tensorflow==2.21.0
+joblib
