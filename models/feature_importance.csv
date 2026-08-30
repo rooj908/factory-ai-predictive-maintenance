@@ -1,0 +1,15 @@
+Feature,Importance
+num__temperature_motor,0.23753760669567908
+num__rpm,0.21478770147755719
+num__current_phase_avg,0.168843148593866
+num__vibration_rms,0.154679541472542
+num__hours_since_maintenance,0.07700446486904551
+num__pressure_level,0.0595455079534962
+num__ambient_temp,0.01933429733163962
+cat__operating_mode_normal,0.014429459423543796
+cat__operating_mode_idle,0.012331957068669753
+cat__operating_mode_peak,0.009541630377452941
+cat__machine_type_Pump,0.009269131197036339
+cat__machine_type_Robotic Arm,0.008536052872156726
+cat__machine_type_Compressor,0.007088586827163953
+cat__machine_type_CNC,0.007070913840150853

@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+tensorflow
+groq
+python-dotenv
+streamlit
+shap
+reportlab
+mlflow
+opencv-python

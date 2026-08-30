@@ -1,0 +1,13 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+mlflow.db
+*.db
+data/images/*
+models/*.pkl
+models/*.joblib
+.ipynb_checkpoints/
+.env
+mlflow.db
