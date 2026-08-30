@@ -229,7 +229,7 @@ This project is designed as an AI decision-support system. Industrial maintenanc
 
 ## Author
 
-Urooj Fatima
+Urooj Fatima and Unsha
 
 GitHub:
 https://github.com/rooj908
