@@ -8,19 +8,29 @@ The system analyzes machine sensor data to identify potential failure risk, expl
 
 ---
 
-## 🏆 Hackathon Project
+## 🚀 Live Demo
+
+### Try Factory AI Online
+
+👉 **[Launch Factory AI Dashboard](https://factory-ai-predictive-maintenance-dctpuwdneohprggwm42o59.streamlit.app/)**
+
+The application provides an interactive dashboard for machine failure prediction, Deep Learning analysis, Computer Vision, RAG knowledge retrieval, AI agents, and Digital Twin simulation.
+
+---
+
+# 🏆 Hackathon Project
 
 **Project:** Factory AI: Intelligent Predictive Maintenance & Decision Support System
 
 **Developed by:** Urooj Fatima & Unsha Siddiqui
 
-This project was developed as a hackathon solution demonstrating how modern AI techniques can support industrial predictive maintenance and maintenance decision-making.
+Factory AI was developed as a hackathon solution demonstrating how modern AI techniques can support industrial predictive maintenance and maintenance decision-making.
 
 ---
 
-## 🎯 Problem Statement
+# 🎯 Problem Statement
 
-Unexpected industrial machine failures can cause:
+Unexpected industrial machine failures can result in:
 
 * Production downtime
 * Equipment damage
@@ -30,7 +40,7 @@ Unexpected industrial machine failures can cause:
 
 Traditional maintenance approaches are often reactive or based on fixed schedules.
 
-### 💡 Our Solution
+## 💡 Our Solution
 
 Factory AI uses machine sensor data and AI-based decision support to identify potential machine failure risk **before a breakdown occurs**.
 
@@ -48,15 +58,15 @@ The system helps answer:
                     │                         │
                     │ Temperature / RPM       │
                     │ Vibration / Pressure    │
-                    │ Current / Maintenance    │
+                    │ Current / Maintenance   │
                     └────────────┬────────────┘
                                  │
                                  ▼
                     ┌─────────────────────────┐
                     │    Data Analysis & EDA   │
                     │                         │
-                    │ Cleaning / Statistics    │
-                    │ Correlation / Outliers   │
+                    │ Cleaning / Statistics   │
+                    │ Correlation / Outliers  │
                     └────────────┬────────────┘
                                  │
                                  ▼
@@ -142,7 +152,7 @@ The system uses industrial machine and operational features including:
 The project includes exploratory data analysis covering:
 
 * Dataset inspection
-* Data types
+* Data type analysis
 * Missing-value analysis
 * Statistical analysis
 * Distribution analysis
@@ -157,14 +167,13 @@ The project includes exploratory data analysis covering:
 
 A **Random Forest Classifier** is used to predict whether a machine is likely to experience failure within the next 24 hours.
 
-The model uses preprocessing for:
+The ML pipeline includes:
 
-* Numerical features
-* Categorical features
+* Numerical feature processing
+* Categorical feature processing
 * One-hot encoding
-* Unknown categorical values
-
-The model also uses class balancing to improve handling of failure cases.
+* Unknown-category handling
+* Class balancing
 
 ---
 
@@ -176,9 +185,7 @@ The Deep Learning model predicts:
 
 > **Probability of machine failure within the next 24 hours**
 
-The Streamlit application automatically uses the Deep Learning prediction when the trained model and preprocessor are available.
-
-### Deep Learning Model
+### Deep Learning Workflow
 
 ```text
 Input Features
@@ -192,14 +199,14 @@ Failure Probability
 Risk Classification
 ```
 
-Reported model performance:
+### Reported Performance
 
 * **Test Accuracy:** 95.13%
 * **ROC-AUC:** 0.9827
 
 ---
 
-## 5. Risk Assessment
+# 🚦 Risk Assessment
 
 The predicted probability is converted into three operational risk levels:
 
@@ -212,7 +219,7 @@ Probability < 40%
         ↓
      MEDIUM
 
-Probability >= 70%
+Probability ≥ 70%
         ↓
       HIGH
 ```
@@ -225,7 +232,7 @@ Factory AI is designed to provide more than a simple prediction.
 
 The XAI component helps identify important factors contributing to machine failure predictions.
 
-Important machine features include:
+### Important Predictive Features
 
 1. Motor Temperature
 2. RPM
@@ -249,9 +256,9 @@ the system aims to provide additional information about **why the machine is con
 
 Factory AI includes a Retrieval-Augmented Generation workflow for maintenance knowledge.
 
-The Knowledge Agent can retrieve relevant information from the project's maintenance knowledge base.
+The Knowledge Agent retrieves relevant information from the project's maintenance knowledge base.
 
-Example knowledge areas include:
+### Example Knowledge Areas
 
 * High Vibration Maintenance Guide
 * Preventive Maintenance SOP
@@ -281,7 +288,7 @@ The Streamlit dashboard allows users to upload machine images.
 
 The Vision Agent can be used as part of the maintenance assessment to provide visual inspection information.
 
-The dashboard displays:
+The dashboard can display:
 
 * Uploaded machine image
 * Detected defect/anomaly
@@ -302,27 +309,21 @@ Analyzes predictive failure information and provides:
 
 * Failure probability
 * Risk level
-* Predictive maintenance information
-
----
+* Maintenance information
 
 ## 👁️ Vision Agent
 
 Processes uploaded machine images and provides visual inspection results.
 
----
-
 ## 📚 Knowledge Agent
 
 Retrieves relevant maintenance information using the RAG workflow.
-
----
 
 ## 🧠 Planning / Decision Agent
 
 Combines information from:
 
-* Predictive model
+* Predictive models
 * Deep Learning
 * Vision
 * Maintenance knowledge
@@ -353,7 +354,7 @@ The system evaluates:
 | Stop for Maintenance |       4h |          15% |             400 |         $8,750 |
 | Reduce Machine Load  |       1h |          35% |             100 |         $3,750 |
 
-The purpose of the Digital Twin is to help maintenance teams compare possible actions rather than relying only on a single prediction.
+The Digital Twin helps maintenance teams compare possible actions rather than relying only on a single prediction.
 
 ---
 
@@ -361,7 +362,7 @@ The purpose of the Digital Twin is to help maintenance teams compare possible ac
 
 Factory AI is a **decision-support system**, not an autonomous industrial control system.
 
-The AI provides recommendations, but the final decision remains with a qualified human supervisor.
+The AI provides recommendations, while the final decision remains with a qualified human supervisor.
 
 ```text
 ┌────────────┐
@@ -398,9 +399,7 @@ The current predictive model achieved approximately:
 
 # 🖥️ Streamlit Dashboard
 
-Factory AI includes an interactive Streamlit dashboard.
-
-### Dashboard Tabs
+The project includes an interactive Streamlit dashboard with six major sections:
 
 | Tab                | Function                        |
 | ------------------ | ------------------------------- |
@@ -452,17 +451,13 @@ Example:
 
 # 🎥 Demo
 
-## Live Demo
+## 🚀 Live Application
 
-Add the deployed Streamlit application URL here after deployment:
+**[Launch Factory AI](https://factory-ai-predictive-maintenance-dctpuwdneohprggwm42o59.streamlit.app/)**
 
-```text
-Coming Soon
-```
+## 🎬 Demo Video
 
-## Demo Video
-
-Add the project demonstration video here:
+Demo video can be added here when available.
 
 ```text
 Coming Soon
@@ -542,13 +537,9 @@ factory-ai-predictive-maintenance/
 │       └── preprocessor.pkl
 │
 ├── models/
-│
 ├── rag/
-│
 ├── xai/
-│
 ├── reports/
-│
 ├── mlruns/
 │
 ├── config.py
@@ -560,8 +551,6 @@ factory-ai-predictive-maintenance/
 ├── .gitignore
 └── README.md
 ```
-
-> Project structure may evolve as additional components are added.
 
 ---
 
@@ -631,23 +620,17 @@ The application will normally be available at:
 http://localhost:8501
 ```
 
----
-
 ## Main Predictive Maintenance System
 
 ```bash
 python main.py
 ```
 
----
-
 ## MLflow Training
 
 ```bash
 python mlflow_train.py
 ```
-
----
 
 ## Digital Twin
 
@@ -658,8 +641,6 @@ python digital_twin.py
 ---
 
 # 📦 Requirements
-
-The project uses:
 
 ```text
 pandas
@@ -687,7 +668,7 @@ Future versions of Factory AI can include:
 * 📡 Live sensor streaming
 * 👁️ Advanced computer vision defect detection
 * 🚨 Advanced anomaly detection
-* ☁️ Cloud deployment
+* ☁️ Cloud deployment improvements
 * 📅 Automated maintenance scheduling
 * 🏭 SCADA / PLC integration
 * 📊 Real-time machine monitoring
@@ -716,16 +697,14 @@ Predictions and simulated costs should be treated as decision-support informatio
 
 Data Science / AI
 
-GitHub:
+**GitHub:**
 https://github.com/rooj908
-
----
 
 ## Unsha Siddiqui
 
 Data Science / AI
 
-GitHub:
+**GitHub:**
 https://github.com/unshaimran
 
 ---
@@ -734,7 +713,7 @@ https://github.com/unshaimran
 
 **Factory AI was collaboratively developed by Urooj Fatima and Unsha Siddiqui.**
 
-The project combines our work across:
+The project combines work across:
 
 * Data Science
 * Machine Learning
@@ -769,6 +748,7 @@ The project combines our work across:
 ║  ✓ Human-in-the-Loop Decision Making         ║
 ║  ✓ MLflow Experiment Tracking                ║
 ║  ✓ Interactive Streamlit Dashboard           ║
+║  ✓ Live Web Application                      ║
 ║                                              ║
 ╚══════════════════════════════════════════════╝
 ```
@@ -777,7 +757,7 @@ The project combines our work across:
 
 # 💡 Project Vision
 
-Factory AI aims to demonstrate how modern AI systems can help industries move from:
+Factory AI demonstrates how modern AI systems can help industries move from:
 
 ```text
 Reactive Maintenance
@@ -789,7 +769,7 @@ Predictive Maintenance
 Intelligent Decision Support
 ```
 
-The ultimate goal is to help maintenance teams:
+The goal is to help maintenance teams:
 
 * Identify machine risks earlier
 * Understand why a machine may be at risk
@@ -810,10 +790,13 @@ The ultimate goal is to help maintenance teams:
 **Repository:**
 https://github.com/rooj908/factory-ai-predictive-maintenance
 
-**GitHub:**
+**Live Demo:**
+https://factory-ai-predictive-maintenance-dctpuwdneohprggwm42o59.streamlit.app/
+
+**Urooj Fatima:**
 https://github.com/rooj908
 
-**Collaborator:**
+**Unsha Siddiqui:**
 https://github.com/unshaimran
 
 ---
