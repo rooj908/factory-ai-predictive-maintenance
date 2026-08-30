@@ -1,4 +1,3 @@
-```python
 import sys
 from pathlib import Path
 
@@ -1731,4 +1730,3 @@ st.caption(
     "Computer Vision + RAG + "
     "Multi-Agent Workflow + Digital Twin"
 )
-```
