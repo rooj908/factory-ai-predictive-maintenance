@@ -1,46 +1,38 @@
-# 🏭 Factory AI Predictive Maintenance System
+# 🏭 Factory AI: Intelligent Predictive Maintenance & Decision Support System
 
-[![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?logo=streamlit)](https://streamlit.io/)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-orange?logo=scikit-learn)](https://scikit-learn.org/)
-[![MLflow](https://img.shields.io/badge/MLflow-Experiment%20Tracking-blue?logo=mlflow)](https://mlflow.org/)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://github.com/rooj908/factory-ai-predictive-maintenance)
+**AI-powered industrial predictive maintenance and decision-support system**
 
-> **AI-powered industrial predictive maintenance and decision-support system**
+Factory AI is an intelligent industrial maintenance system that combines **Machine Learning, Deep Learning, Explainable AI, Computer Vision, RAG, Multi-Agent AI, MLflow, and Digital Twin simulation** into one interactive Streamlit dashboard.
 
-Factory AI is an intelligent predictive maintenance system that analyzes industrial machine data to detect failure risk, explain predictions, retrieve relevant maintenance knowledge, evaluate machine images, simulate operational scenarios, and support human maintenance decisions.
+The system analyzes machine sensor data to identify potential failure risk, explains important prediction factors, retrieves relevant maintenance knowledge, supports visual machine inspection, compares maintenance scenarios, and provides recommendations for human review.
 
 ---
 
 ## 🏆 Hackathon Project
 
-### Factory AI: Intelligent Predictive Maintenance & Decision Support System
+**Project:** Factory AI: Intelligent Predictive Maintenance & Decision Support System
 
-This project was developed as a hackathon solution for applying **Artificial Intelligence and Data Science to industrial maintenance**.
+**Developed by:** Urooj Fatima & Unsha Siddiqui
 
-The system combines:
-
-**Machine Learning + Explainable AI + RAG + AI Agents + Computer Vision + Digital Twin + MLflow + Streamlit**
-
-to create an integrated predictive maintenance workflow.
+This project was developed as a hackathon solution demonstrating how modern AI techniques can support industrial predictive maintenance and maintenance decision-making.
 
 ---
 
-# 🎯 Problem Statement
+## 🎯 Problem Statement
 
-Unexpected industrial machine failures can result in:
+Unexpected industrial machine failures can cause:
 
 * Production downtime
-* Maintenance costs
 * Equipment damage
+* High maintenance costs
 * Reduced productivity
 * Safety risks
 
 Traditional maintenance approaches are often reactive or based on fixed schedules.
 
-### Our Solution
+### 💡 Our Solution
 
-Factory AI uses machine sensor data and AI techniques to identify potential failure risk **before a breakdown occurs** and provide evidence-based maintenance recommendations.
+Factory AI uses machine sensor data and AI-based decision support to identify potential machine failure risk **before a breakdown occurs**.
 
 The system helps answer:
 
@@ -51,75 +43,87 @@ The system helps answer:
 # 🧠 System Architecture
 
 ```text
-                    ┌──────────────────────┐
-                    │   Machine Sensors    │
-                    │ Temperature / RPM    │
-                    │ Vibration / Pressure  │
-                    │ Current / Maintenance │
-                    └──────────┬───────────┘
+                    ┌─────────────────────────┐
+                    │     Machine Sensors     │
+                    │                         │
+                    │ Temperature / RPM       │
+                    │ Vibration / Pressure    │
+                    │ Current / Maintenance    │
+                    └────────────┬────────────┘
+                                 │
+                                 ▼
+                    ┌─────────────────────────┐
+                    │    Data Analysis & EDA   │
+                    │                         │
+                    │ Cleaning / Statistics    │
+                    │ Correlation / Outliers   │
+                    └────────────┬────────────┘
+                                 │
+                                 ▼
+              ┌────────────────────────────────────┐
+              │        Predictive Models           │
+              │                                    │
+              │ Random Forest + Deep Learning MLP  │
+              └────────────────┬───────────────────┘
                                │
                                ▼
-                    ┌──────────────────────┐
-                    │ Data Analysis & EDA  │
-                    │ Cleaning / Analysis  │
-                    │ Feature Investigation│
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ Predictive ML Model  │
-                    │   Random Forest      │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ Failure Risk         │
-                    │ LOW / MEDIUM / HIGH  │
-                    └──────────┬───────────┘
-                               │
-              ┌────────────────┼────────────────┐
-              │                │                │
-              ▼                ▼                ▼
-       ┌────────────┐   ┌────────────┐   ┌────────────┐
-       │    XAI     │   │    RAG     │   │   Vision   │
-       │ Explain    │   │ Knowledge  │   │ Inspection │
-       │ Prediction │   │ Retrieval  │   │            │
-       └──────┬─────┘   └──────┬─────┘   └──────┬─────┘
-              │                │                │
-              └────────────────┼────────────────┘
-                               ▼
-                    ┌──────────────────────┐
-                    │   AI Agent Workflow  │
-                    │ Analysis & Planning  │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │    Digital Twin      │
-                    │    What-if Analysis  │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ Human Supervisor     │
-                    │ APPROVE / REJECT /   │
-                    │ MODIFY               │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │ Final Maintenance    │
-                    │ Decision             │
-                    └──────────────────────┘
+                    ┌─────────────────────────┐
+                    │      Failure Risk       │
+                    │                         │
+                    │ LOW / MEDIUM / HIGH     │
+                    └────────────┬────────────┘
+                                 │
+              ┌──────────────────┼──────────────────┐
+              │                  │                  │
+              ▼                  ▼                  ▼
+       ┌────────────┐    ┌────────────┐    ┌────────────┐
+       │    XAI     │    │    RAG     │    │   Vision   │
+       │            │    │            │    │            │
+       │ Explain    │    │ Maintenance│    │  Machine   │
+       │ Prediction │    │ Knowledge  │    │ Inspection │
+       └──────┬─────┘    └──────┬─────┘    └──────┬─────┘
+              │                 │                  │
+              └─────────────────┼──────────────────┘
+                                ▼
+                    ┌─────────────────────────┐
+                    │    Multi-Agent System   │
+                    │                         │
+                    │ Predictive Agent        │
+                    │ Vision Agent            │
+                    │ Knowledge Agent         │
+                    │ Planning Agent          │
+                    └────────────┬────────────┘
+                                 │
+                                 ▼
+                    ┌─────────────────────────┐
+                    │      Digital Twin       │
+                    │                         │
+                    │ What-if Simulation      │
+                    │ Risk / Cost / Downtime  │
+                    └────────────┬────────────┘
+                                 │
+                                 ▼
+                    ┌─────────────────────────┐
+                    │   Human Supervisor      │
+                    │                         │
+                    │ APPROVE / REJECT /      │
+                    │ MODIFY                  │
+                    └────────────┬────────────┘
+                                 │
+                                 ▼
+                    ┌─────────────────────────┐
+                    │ Final Maintenance       │
+                    │ Decision                │
+                    └─────────────────────────┘
 ```
 
 ---
 
 # ⚙️ How It Works
 
-### Step 1: Machine Data
+## 1. Machine Data
 
-The system receives industrial sensor and operational data including:
+The system uses industrial machine and operational features including:
 
 * Motor temperature
 * RPM
@@ -128,13 +132,17 @@ The system receives industrial sensor and operational data including:
 * Pressure level
 * Hours since maintenance
 * Ambient temperature
+* Machine type
+* Operating mode
 
-### Step 2: Data Analysis
+---
 
-The data is analyzed through:
+## 2. Data Analysis
+
+The project includes exploratory data analysis covering:
 
 * Dataset inspection
-* Data type analysis
+* Data types
 * Missing-value analysis
 * Statistical analysis
 * Distribution analysis
@@ -143,72 +151,170 @@ The data is analyzed through:
 * Feature relationships
 * Failure-related analysis
 
-### Step 3: Predictive Model
+---
 
-A Random Forest classification model predicts the probability of machine failure.
+## 3. Predictive Machine Learning
 
-### Step 4: Risk Assessment
+A **Random Forest Classifier** is used to predict whether a machine is likely to experience failure within the next 24 hours.
 
-The predicted failure probability is converted into an operational risk level:
+The model uses preprocessing for:
 
-```text
-LOW
-MEDIUM
-HIGH
-```
+* Numerical features
+* Categorical features
+* One-hot encoding
+* Unknown categorical values
 
-### Step 5: Explainability
-
-XAI techniques identify the important factors contributing to the prediction.
-
-### Step 6: Knowledge Retrieval
-
-The RAG component retrieves relevant maintenance procedures and safety information.
-
-### Step 7: Visual Inspection
-
-Machine images can be uploaded for visual inspection as part of the maintenance assessment.
-
-### Step 8: AI Decision Support
-
-The AI workflow combines prediction, visual information, and maintenance knowledge to produce a recommendation.
-
-### Step 9: Digital Twin
-
-Different operational scenarios can be compared to estimate:
-
-* Failure risk
-* Downtime
-* Production impact
-* Estimated cost
-
-### Step 10: Human Approval
-
-A human supervisor reviews the recommendation before the final maintenance decision.
+The model also uses class balancing to improve handling of failure cases.
 
 ---
 
-# 🤖 AI Components
+## 4. Deep Learning
+
+Factory AI also includes a trained **MLP Neural Network** using TensorFlow/Keras.
+
+The Deep Learning model predicts:
+
+> **Probability of machine failure within the next 24 hours**
+
+The Streamlit application automatically uses the Deep Learning prediction when the trained model and preprocessor are available.
+
+### Deep Learning Model
+
+```text
+Input Features
+      ↓
+Preprocessing
+      ↓
+MLP Neural Network
+      ↓
+Failure Probability
+      ↓
+Risk Classification
+```
+
+Reported model performance:
+
+* **Test Accuracy:** 95.13%
+* **ROC-AUC:** 0.9827
+
+---
+
+## 5. Risk Assessment
+
+The predicted probability is converted into three operational risk levels:
+
+```text
+Probability < 40%
+        ↓
+      LOW
+
+40% - 69%
+        ↓
+     MEDIUM
+
+Probability >= 70%
+        ↓
+      HIGH
+```
+
+---
+
+# 🔍 Explainable AI
+
+Factory AI is designed to provide more than a simple prediction.
+
+The XAI component helps identify important factors contributing to machine failure predictions.
+
+Important machine features include:
+
+1. Motor Temperature
+2. RPM
+3. Average Phase Current
+4. Vibration RMS
+5. Hours Since Maintenance
+6. Pressure Level
+7. Ambient Temperature
+
+Instead of only showing:
+
+```text
+Failure = YES
+```
+
+the system aims to provide additional information about **why the machine is considered risky**.
+
+---
+
+# 📚 RAG Maintenance Knowledge
+
+Factory AI includes a Retrieval-Augmented Generation workflow for maintenance knowledge.
+
+The Knowledge Agent can retrieve relevant information from the project's maintenance knowledge base.
+
+Example knowledge areas include:
+
+* High Vibration Maintenance Guide
+* Preventive Maintenance SOP
+* Electrical Safety SOP
+
+### Example Workflow
+
+```text
+Machine Condition
+       ↓
+High Vibration
+       +
+Elevated Temperature
+       ↓
+Retrieve Relevant Knowledge
+       ↓
+Maintenance Guidance
+       ↓
+AI Recommendation
+```
+
+---
+
+# 👁️ Computer Vision
+
+The Streamlit dashboard allows users to upload machine images.
+
+The Vision Agent can be used as part of the maintenance assessment to provide visual inspection information.
+
+The dashboard displays:
+
+* Uploaded machine image
+* Detected defect/anomaly
+* Severity
+* Confidence
+
+This allows sensor-based predictive maintenance to be combined with visual inspection.
+
+---
+
+# 🤖 Multi-Agent AI System
+
+Factory AI uses multiple specialized agents.
 
 ## 🔮 Predictive Maintenance Agent
 
-Analyzes machine sensor data and provides:
+Analyzes predictive failure information and provides:
 
 * Failure probability
-* Risk classification
-* Maintenance recommendation
+* Risk level
+* Predictive maintenance information
 
 ---
 
 ## 👁️ Vision Agent
 
-Processes uploaded machine images and provides a visual inspection result.
+Processes uploaded machine images and provides visual inspection results.
 
 ---
 
 ## 📚 Knowledge Agent
 
-Uses Retrieval-Augmented Generation to retrieve relevant maintenance knowledge from the project's knowledge base.
+Retrieves relevant maintenance information using the RAG workflow.
 
 ---
 
@@ -216,112 +322,46 @@ Uses Retrieval-Augmented Generation to retrieve relevant maintenance knowledge f
 
 Combines information from:
 
-* Machine learning
-* XAI
+* Predictive model
+* Deep Learning
 * Vision
-* RAG
-* Digital Twin
+* Maintenance knowledge
+* Risk assessment
 
-to generate a final recommendation for human review.
-
----
-
-# 📊 Machine Learning Performance
-
-The current predictive model achieved:
-
-| Metric         | Result |
-| -------------- | -----: |
-| Accuracy       |   ~98% |
-| ROC-AUC        | ~0.997 |
-| Failure Recall |  ~0.96 |
-| Test Samples   |  4,809 |
-
-> Results can vary when the model is retrained with different data splits or configurations.
-
----
-
-# ⭐ Important Features
-
-The major predictive features include:
-
-1. **Motor Temperature**
-2. **RPM**
-3. **Average Phase Current**
-4. **Vibration RMS**
-5. **Hours Since Maintenance**
-6. **Pressure Level**
-7. **Ambient Temperature**
-
----
-
-# 🔍 Explainable AI
-
-Factory AI does not treat the model as a black box.
-
-The XAI component helps identify which features contribute to machine failure predictions.
-
-This provides maintenance teams with additional context instead of showing only:
-
-```text
-Failure = YES
-```
-
-The system can instead provide information about **why the machine is considered risky**.
-
----
-
-# 📚 RAG Maintenance Knowledge
-
-The RAG knowledge base contains maintenance-related information such as:
-
-* High Vibration Maintenance Guide
-* Preventive Maintenance SOP
-* Electrical Safety SOP
-
-The Knowledge Agent retrieves relevant information based on the machine condition.
-
-### Example
-
-```text
-Machine condition:
-High vibration + elevated temperature
-
-↓
-
-Retrieve relevant maintenance information
-
-↓
-
-Recommendation:
-Inspect machine before returning it to full production.
-```
+and generates a maintenance recommendation.
 
 ---
 
 # 🪞 Digital Twin Simulation
 
-The Digital Twin component allows the user to compare different operational scenarios.
+The Digital Twin component provides **what-if analysis**.
 
-### Example
+Users can compare different operational strategies before making a maintenance decision.
 
-| Scenario             | Downtime | Failure Risk | Estimated Cost |
-| -------------------- | -------: | -----------: | -------------: |
-| Continue Operation   |       0h |          78% |           3900 |
-| Stop for Maintenance |       4h |          15% |           8750 |
-| Reduce Machine Load  |       1h |          35% |           3750 |
+The system evaluates:
 
-This allows a supervisor to compare possible decisions instead of relying only on a single model prediction.
+* Failure risk
+* Downtime
+* Production loss
+* Estimated cost
+
+### Example Scenarios
+
+| Scenario             | Downtime | Failure Risk | Production Loss | Estimated Cost |
+| -------------------- | -------: | -----------: | --------------: | -------------: |
+| Continue Operation   |       0h |          78% |               0 |         $3,900 |
+| Stop for Maintenance |       4h |          15% |             400 |         $8,750 |
+| Reduce Machine Load  |       1h |          35% |             100 |         $3,750 |
+
+The purpose of the Digital Twin is to help maintenance teams compare possible actions rather than relying only on a single prediction.
 
 ---
 
 # 👨‍💼 Human-in-the-Loop
 
-Factory AI is designed as a **decision-support system**.
+Factory AI is a **decision-support system**, not an autonomous industrial control system.
 
-The AI does not independently control industrial equipment.
-
-A human supervisor can:
+The AI provides recommendations, but the final decision remains with a qualified human supervisor.
 
 ```text
 ┌────────────┐
@@ -337,55 +377,72 @@ A human supervisor can:
 └────────────┘
 ```
 
-The final operational decision remains under human supervision.
+Actual maintenance operations should always follow appropriate industrial safety procedures.
+
+---
+
+# 📊 Machine Learning Performance
+
+The current predictive model achieved approximately:
+
+| Metric         | Result |
+| -------------- | -----: |
+| Accuracy       |   ~98% |
+| ROC-AUC        | ~0.997 |
+| Failure Recall |  ~0.96 |
+| Test Samples   |  4,809 |
+
+> Model performance may vary depending on data splits, preprocessing, and retraining configuration.
 
 ---
 
 # 🖥️ Streamlit Dashboard
 
-The project includes an interactive Streamlit dashboard that brings the major components together.
+Factory AI includes an interactive Streamlit dashboard.
+
+### Dashboard Tabs
+
+| Tab                | Function                        |
+| ------------------ | ------------------------------- |
+| 📊 Prediction      | Machine failure prediction      |
+| 🧠 Deep Learning   | Neural network prediction       |
+| 📷 Computer Vision | Machine image inspection        |
+| 📚 RAG Knowledge   | Maintenance knowledge retrieval |
+| 🤖 Agents          | Multi-agent decision workflow   |
+| 🔮 Digital Twin    | What-if maintenance simulation  |
 
 ### Dashboard Features
 
-* 📊 Machine condition analysis
-* 🤖 Failure-risk prediction
-* 🚦 Risk classification
-* 👁️ Machine image upload
-* 🔍 Explainable AI insights
-* 📚 Maintenance knowledge retrieval
-* 🧠 AI-generated recommendations
-* 🪞 Digital Twin what-if analysis
-* 👨‍💼 Human decision support
-
-### Run Dashboard
-
-```bash
-streamlit run app/streamlit_app.py
-```
-
-Then open:
-
-```text
-http://localhost:8501
-```
+* Machine sensor input
+* Failure probability
+* Risk classification
+* Deep Learning prediction
+* Machine image upload
+* Computer Vision inspection
+* RAG knowledge retrieval
+* AI maintenance recommendation
+* Digital Twin simulation
+* Human decision support
 
 ---
 
 # 📸 Dashboard Preview
 
-> Add screenshots of the Streamlit dashboard here after taking them during the demo.
+Screenshots can be added under:
 
 ```text
 docs/
 └── screenshots/
     ├── dashboard.png
     ├── prediction.png
-    ├── xai.png
-    ├── digital_twin.png
-    └── final_decision.png
+    ├── deep_learning.png
+    ├── computer_vision.png
+    ├── rag.png
+    ├── agents.png
+    └── digital_twin.png
 ```
 
-Example Markdown:
+Example:
 
 ```markdown
 ![Factory AI Dashboard](docs/screenshots/dashboard.png)
@@ -395,17 +452,17 @@ Example Markdown:
 
 # 🎥 Demo
 
-### Live Demo
+## Live Demo
 
-Add your deployed Streamlit URL here:
+Add the deployed Streamlit application URL here after deployment:
 
 ```text
 Coming Soon
 ```
 
-### Demo Video
+## Demo Video
 
-Add your YouTube or Google Drive demo link here:
+Add the project demonstration video here:
 
 ```text
 Coming Soon
@@ -415,41 +472,47 @@ Coming Soon
 
 # 📈 MLflow Experiment Tracking
 
-MLflow is used to track model experiments and artifacts.
+MLflow is included for experiment tracking and model development.
 
-Tracked information includes:
+Tracked information can include:
 
 * Accuracy
 * ROC-AUC
 * Failure Recall
 * Model artifacts
-* Experiment information
+* Experiment parameters
+* Experiment results
 
-The repository contains the MLflow experiment directory:
+The repository includes:
 
 ```text
 mlruns/
 ```
 
+for MLflow experiment information.
+
 ---
 
 # 🛠️ Tech Stack
 
-| Category         | Technologies                   |
-| ---------------- | ------------------------------ |
-| Language         | Python                         |
-| Data Processing  | Pandas, NumPy                  |
-| Visualization    | Matplotlib, Seaborn            |
-| Machine Learning | Scikit-learn                   |
-| Model            | Random Forest                  |
-| Explainability   | XAI / Feature Importance       |
-| LLM              | Groq                           |
-| RAG              | Retrieval-Augmented Generation |
-| Computer Vision  | Image-based inspection         |
-| Simulation       | Digital Twin                   |
-| MLOps            | MLflow                         |
-| Dashboard        | Streamlit                      |
-| Version Control  | Git & GitHub                   |
+| Category             | Technologies                   |
+| -------------------- | ------------------------------ |
+| Programming Language | Python                         |
+| Data Processing      | Pandas, NumPy                  |
+| Visualization        | Matplotlib, Seaborn            |
+| Machine Learning     | Scikit-learn                   |
+| ML Model             | Random Forest                  |
+| Deep Learning        | TensorFlow / Keras             |
+| Explainability       | SHAP / Feature Importance      |
+| LLM                  | Groq                           |
+| RAG                  | Retrieval-Augmented Generation |
+| Computer Vision      | Pillow / Image Analysis        |
+| Multi-Agent AI       | Python-based Agents            |
+| Simulation           | Digital Twin                   |
+| MLOps                | MLflow                         |
+| Dashboard            | Streamlit                      |
+| Environment          | python-dotenv                  |
+| Version Control      | Git & GitHub                   |
 
 ---
 
@@ -463,19 +526,30 @@ factory-ai-predictive-maintenance/
 ├── app/
 │   └── streamlit_app.py
 │
+├── agents/
+│   ├── predictive_agent.py
+│   ├── vision_agent.py
+│   ├── knowledge_agent.py
+│   └── planning_agent.py
+│
 ├── data/
-│   └── factory_data.csv
+│   ├── factory_data.csv
+│   └── images/
+│
+├── deep_learning/
+│   └── model/
+│       ├── factory_failure_mlp.keras
+│       └── preprocessor.pkl
 │
 ├── models/
 │
 ├── rag/
 │
-├── reports/
-│
 ├── xai/
 │
+├── reports/
+│
 ├── mlruns/
-│   └── MLflow artifacts
 │
 ├── config.py
 ├── digital_twin.py
@@ -486,6 +560,8 @@ factory-ai-predictive-maintenance/
 ├── .gitignore
 └── README.md
 ```
+
+> Project structure may evolve as additional components are added.
 
 ---
 
@@ -529,7 +605,7 @@ pip install -r requirements.txt
 
 # 🔐 Environment Variables
 
-Create a `.env` file:
+Create a `.env` file in the project root:
 
 ```env
 GROQ_API_KEY=your_groq_api_key
@@ -537,29 +613,43 @@ GROQ_API_KEY=your_groq_api_key
 
 Never commit API keys or `.env` files to GitHub.
 
+Make sure `.env` is included in `.gitignore`.
+
 ---
 
 # ▶️ Run the Project
 
-### Streamlit Dashboard
+## Streamlit Dashboard
 
 ```bash
 streamlit run app/streamlit_app.py
 ```
 
-### Main Predictive Maintenance System
+The application will normally be available at:
+
+```text
+http://localhost:8501
+```
+
+---
+
+## Main Predictive Maintenance System
 
 ```bash
 python main.py
 ```
 
-### MLflow Training
+---
+
+## MLflow Training
 
 ```bash
 python mlflow_train.py
 ```
 
-### Digital Twin
+---
+
+## Digital Twin
 
 ```bash
 python digital_twin.py
@@ -567,9 +657,31 @@ python digital_twin.py
 
 ---
 
+# 📦 Requirements
+
+The project uses:
+
+```text
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+streamlit
+python-dotenv
+groq
+Pillow
+shap
+mlflow
+tensorflow==2.21.0
+joblib
+```
+
+---
+
 # 🔮 Future Improvements
 
-Future versions can include:
+Future versions of Factory AI can include:
 
 * 🌐 Real-time IoT sensor integration
 * 📡 Live sensor streaming
@@ -579,9 +691,10 @@ Future versions can include:
 * 📅 Automated maintenance scheduling
 * 🏭 SCADA / PLC integration
 * 📊 Real-time machine monitoring
-* 🧠 More advanced predictive models
+* 🧠 Advanced predictive models
 * 📝 Automated maintenance history
 * 🔄 Continuous model retraining
+* 📱 Mobile maintenance alerts
 
 ---
 
@@ -589,9 +702,11 @@ Future versions can include:
 
 Factory AI is an AI-assisted decision-support system.
 
-It should not independently control industrial machinery.
+It should **not independently control industrial machinery**.
 
-Actual maintenance operations should always be reviewed by qualified personnel and performed according to appropriate industrial safety procedures.
+Actual maintenance decisions should be reviewed by qualified personnel and carried out according to appropriate industrial safety procedures.
+
+Predictions and simulated costs should be treated as decision-support information rather than guaranteed outcomes.
 
 ---
 
@@ -599,17 +714,37 @@ Actual maintenance operations should always be reviewed by qualified personnel a
 
 ## Urooj Fatima
 
+Data Science / AI
+
 GitHub:
 https://github.com/rooj908
 
+---
+
 ## Unsha Siddiqui
+
+Data Science / AI
 
 GitHub:
 https://github.com/unshaimran
 
-### Project Collaboration
+---
+
+## 🤝 Project Collaboration
 
 **Factory AI was collaboratively developed by Urooj Fatima and Unsha Siddiqui.**
+
+The project combines our work across:
+
+* Data Science
+* Machine Learning
+* Deep Learning
+* Explainable AI
+* RAG
+* Computer Vision
+* AI Agents
+* Digital Twin
+* Streamlit
 
 ---
 
@@ -617,17 +752,18 @@ https://github.com/unshaimran
 
 ```text
 ╔══════════════════════════════════════════════╗
-║             FACTORY AI                       ║
-║     Intelligent Predictive Maintenance       ║
+║                 FACTORY AI                   ║
+║      Intelligent Predictive Maintenance      ║
 ╠══════════════════════════════════════════════╣
 ║                                              ║
 ║  ✓ Machine Failure Prediction                ║
 ║  ✓ Random Forest Classification              ║
-║  ✓ ~98% Model Accuracy                       ║
-║  ✓ ~0.997 ROC-AUC                             ║
+║  ✓ Deep Learning MLP                         ║
+║  ✓ ~98% ML Accuracy                          ║
+║  ✓ ~0.997 ML ROC-AUC                         ║
 ║  ✓ Explainable AI                            ║
 ║  ✓ RAG Maintenance Knowledge                 ║
-║  ✓ AI Agent Workflow                         ║
+║  ✓ Multi-Agent AI Workflow                   ║
 ║  ✓ Computer Vision Support                   ║
 ║  ✓ Digital Twin Simulation                   ║
 ║  ✓ Human-in-the-Loop Decision Making         ║
@@ -653,16 +789,37 @@ Predictive Maintenance
 Intelligent Decision Support
 ```
 
-The ultimate goal is to help maintenance teams identify risks earlier, understand the reasons behind predictions, compare possible actions, and make better-informed decisions.
+The ultimate goal is to help maintenance teams:
+
+* Identify machine risks earlier
+* Understand why a machine may be at risk
+* Retrieve relevant maintenance knowledge
+* Inspect machines visually
+* Compare possible maintenance strategies
+* Estimate potential costs and downtime
+* Make better-informed maintenance decisions
 
 ---
 
-## 📌 Hackathon
+# 📌 Hackathon Summary
 
 **Project:** Factory AI: Intelligent Predictive Maintenance & Decision Support System
 
-**Developed by:**
-**Urooj Fatima & Unsha Siddiqui**
+**Developed by:** Urooj Fatima & Unsha Siddiqui
 
 **Repository:**
 https://github.com/rooj908/factory-ai-predictive-maintenance
+
+**GitHub:**
+https://github.com/rooj908
+
+**Collaborator:**
+https://github.com/unshaimran
+
+---
+
+## ⭐ Support
+
+If you find this project useful or interesting, consider giving the repository a ⭐ on GitHub.
+
+**Built with Python, Machine Learning, Deep Learning, RAG, AI Agents, Computer Vision, MLflow, Digital Twin, and Streamlit.**
